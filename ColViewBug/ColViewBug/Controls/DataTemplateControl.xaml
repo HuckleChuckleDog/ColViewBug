@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColViewBug.Controls.DataTemplateControl"
+             x:Name="control">
+  <ContentView.Content>
+      <StackLayout>
+
+            <Label Text="{Binding LabelText, Source={x:Reference control}}"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   BackgroundColor="LightGreen"
+                   HeightRequest="70"
+                   Margin="0,0,0,-6">
+                
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TapGestCommand, Source={x:Reference control}}"
+                                          CommandParameter="Tap Pressed"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <BoxView WidthRequest="300"
+                     HeightRequest="1"
+                     Color="Red"
+                     Margin="0"/>
+
+        </StackLayout>
+  </ContentView.Content>
+
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding TapGestCommand, Source={x:Reference control}}"/>
+    </ContentView.GestureRecognizers>
+    
+</ContentView>

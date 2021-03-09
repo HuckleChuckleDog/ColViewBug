@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ColViewBug.MainPage"
+             xmlns:controls="clr-namespace:ColViewBug.Controls"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Name="page">
+
+    <StackLayout>
+
+        <Frame  BackgroundColor="SandyBrown">
+            <StackLayout Orientation="Horizontal">
+
+                <ScrollView HeightRequest="200">
+                    <Label x:Name="outputLabel" FontSize="Large" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                </ScrollView>
+
+                <Button Text="Clear" Clicked="Button_Clicked"
+                        VerticalOptions="Start"
+                        HorizontalOptions="EndAndExpand"/>
+
+            </StackLayout>
+
+        </Frame>
+
+
+        <StackLayout BindableLayout.ItemsSource="{Binding Col}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+
+                    <SwipeView SwipeStarted="SwipeView_SwipeStarted"
+                               SwipeChanging="SwipeView_SwipeChanging"
+                               SwipeEnded="SwipeView_SwipeEnded">
+
+                        <SwipeView.LeftItems>
+
+                            <SwipeItems>
+
+                                <SwipeItem Text="Send"
+                                           BackgroundColor="Yellow"
+                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.SendCommand}"/>
+
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="LightPink"
+                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteCommand}"/>
+
+                            </SwipeItems>
+                            
+                            
+                        </SwipeView.LeftItems>
+
+                        <SwipeView.RightItems>
+
+                            <SwipeItems>
+
+                                <SwipeItem Text="Convert"
+                                           BackgroundColor="LightBlue"
+                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.ConvertCommand}"/>
+
+                                <SwipeItem Text="Save"
+                                           BackgroundColor="LightSeaGreen"
+                                           Command="{Binding Source={x:Reference page}, Path=BindingContext.SaveCommand}"/>
+
+                            </SwipeItems>
+                            
+                            
+                        </SwipeView.RightItems>
+
+                        <StackLayout>
+
+                            <controls:DataTemplateControl LabelText="{Binding Row1Text}"
+                                                          TapGestCommand="{Binding Source={x:Reference page}, Path=BindingContext.TapGestCommand}"/>
+
+                        </StackLayout>
+                        
+                        
+                    </SwipeView>
+                    
+                    
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+
+
+    </StackLayout>
+
+</ContentPage>
